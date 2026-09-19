@@ -79,16 +79,16 @@
     .items .summary-row td { height:23px; }
     .items .total-row td { height:30px; }
     .total-label { background:#d8e8f4; text-align:center; font-size:19px; font-weight:900; }
-    .words { min-height:62px; padding:8px 12px; border-bottom:2px solid; text-align:center; font-family:Georgia, "Times New Roman", serif; font-weight:700; }
-    .footer { display:grid; grid-template-columns:43% 57%; min-height:140px; }
-    .bank { border-right:2px solid; }
-    .bank-cap { height:21px; border-bottom:2px solid; background:#d8e8f4; }
-    .bank p { margin:0; padding:3px 5px; border-bottom:2px solid; overflow:hidden; overflow-wrap:anywhere; line-height:1.25; }
-    .cert { position:relative; padding:5px 8px; text-align:center; font-family:Georgia, "Times New Roman", serif; }
+    .words { min-height:62px; display:flex; align-items:center; justify-content:center; padding:8px 12px; border-bottom:2px solid; text-align:center; font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:1.35; font-weight:700; }
+    .footer { display:grid; grid-template-columns:43% 57%; min-height:105px; }
+    .bank { align-self:stretch; border-right:2px solid; }
+    .bank-cap { height:17px; border-bottom:2px solid; background:#d8e8f4; }
+    .bank p { margin:0; padding:2px 5px; border-bottom:2px solid; overflow:hidden; overflow-wrap:anywhere; line-height:1.2; }
+    .cert { display:flex; flex-direction:column; min-height:105px; padding:4px 8px; text-align:center; font-family:Georgia, "Times New Roman", serif; }
     .cert-note { font-size:10px; }
-    .sign-title { margin:8px 0 0; font-size:14px; font-weight:700; }
-    .signature { margin:17px auto 0; color:#183150; font-family:"Brush Script MT", cursive; font-size:19px; transform:rotate(-3deg); }
-    .sign-label { position:absolute; right:0; bottom:0; width:100%; padding:5px; border-top:0; font-size:14px; font-weight:700; }
+    .sign-title { margin:4px 0 0; font-size:14px; font-weight:700; }
+    .signature { flex:1 1 auto; min-height:28px; margin:2px 0; }
+    .sign-label { margin-top:auto; width:100%; padding:3px; font-size:14px; font-weight:700; }
     .small-note { margin:14px 0 0; color:var(--muted); text-align:center; font-size:.78rem; }
     @media (max-width:1100px) {
       .workspace { grid-template-columns:1fr; }
@@ -252,7 +252,7 @@
               <div class="cert">
                 <div class="cert-note">Certified that the particular given above are true and correct</div>
                 <div class="sign-title">For&nbsp; <span data-out="companyName"></span></div>
-                <div class="signature">For, Satyam Diamond</div>
+                <div class="signature" aria-label="Blank signature area"></div>
                 <div class="sign-label">Authorised Signatory</div>
               </div>
             </section>
