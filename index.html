@@ -10,7 +10,7 @@
   <style>
     :root { --ink:#101820; --navy:#10263d; --blue:#bdd8ee; --blue-strong:#8fb8d8; --line:#111; --paper:#fff; --bg:#edf2f6; --muted:#64748b; --focus:#1671b9; }
     * { box-sizing: border-box; }
-    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.45 Arial, Helvetica, sans-serif; }
     button, input, textarea, select { font:inherit; }
     button { cursor:pointer; }
     .appbar { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px 22px; color:#fff; background:var(--navy); box-shadow:0 2px 12px #0f22384a; }
@@ -39,17 +39,13 @@
     .item-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:9px; color:var(--navy); font-weight:800; }
     .remove { border:0; color:#a72c2c; background:transparent; font-weight:700; font-size:.78rem; }
     .add-item { grid-column:1/-1; width:100%; border:1px dashed #7691a9; border-radius:8px; padding:9px; color:var(--navy); background:#eef5fa; font-weight:800; }
-    .column-control { grid-column:1/-1; }
-    .column-control label { display:flex; justify-content:space-between; gap:12px; }
-    .column-control input[type="range"] { min-height:28px; padding:0; accent-color:var(--navy); }
-    .column-width-value { color:var(--navy); font-weight:800; white-space:nowrap; }
     .mobile-tabs { display:none; }
     .preview-area { align-self:start; overflow:auto; padding:28px; background:radial-gradient(circle at top, #f7fafc 0, #e7edf2 70%); }
     .paper-stage { width:816px; min-height:0; margin:0 auto; }
     .paper-wrap { width:816px; filter:drop-shadow(0 12px 25px #32465a2e); transform-origin:top left; }
     .invoice-sheet { width:816px; min-height:0; overflow:hidden; padding:24px; background:var(--paper); color:#0a0a0a; font-family:Arial, Helvetica, sans-serif; font-size:13px; }
     .invoice-border { border:2px solid var(--line); }
-    .company-head { height:123px; padding:6px 12px; text-align:center; font-family:Georgia, "Times New Roman", serif; font-weight:700; }
+    .company-head { height:123px; padding:6px 12px; text-align:center; font-family:Arial, Helvetica, sans-serif; font-weight:700; }
     .company-head h2 { margin:0 0 2px; font-size:25px; overflow-wrap:anywhere; }
     .company-head p { margin:5px 0; font-size:15px; overflow-wrap:anywhere; }
     .rule-gap { height:13px; border-top:2px solid; border-bottom:2px solid; }
@@ -67,32 +63,30 @@
     .party-state { min-height:43px; overflow:hidden; padding:3px 5px; border-top:2px solid; white-space:pre-line; overflow-wrap:anywhere; font-weight:700; }
     .items { width:100%; border-collapse:collapse; table-layout:fixed; }
     .items th, .items td { border-right:2px solid; border-bottom:2px solid; padding:4px 3px; overflow:hidden; overflow-wrap:anywhere; vertical-align:middle; }
+    .items td { font-size:11px; }
     .items th:last-child, .items td:last-child { border-right:0; }
-    .items th { position:relative; height:43px; overflow:visible; background:var(--blue); font-size:13px; }
-    .items .c-num { width:var(--col-num,44px); text-align:center; }
-    .items .c-desc { width:var(--col-desc,232px); }
-    .items .c-hsn { width:var(--col-hsn,64px); text-align:center; }
-    .items .c-qty { width:var(--col-qty,64px); text-align:center; }
-    .items .c-rate { width:var(--col-rate,67px); text-align:center; }
-    .items .c-amount { width:var(--col-amount,68px); text-align:right; }
-    .items .c-discount { width:var(--col-discount,60px); text-align:right; }
-    .items .c-value { width:var(--col-value,165px); text-align:right; padding-right:14px; }
-    .column-resizer { position:absolute; z-index:3; top:0; right:-9px; width:18px; height:100%; cursor:col-resize; touch-action:none; }
-    .column-resizer::after { content:''; position:absolute; top:3px; bottom:3px; left:7px; width:4px; border-radius:3px; background:#244c6a; opacity:.8; }
-    .column-resizer:hover::after, .column-resizer.active::after { width:5px; background:#071b2d; opacity:1; }
+    .items th { height:43px; padding:4px 2px; background:var(--blue); text-align:center !important; vertical-align:middle; font-size:12px; line-height:1.2; }
+    .items .c-num { width:44px; text-align:center; }
+    .items .c-desc { width:232px; }
+    .items .c-hsn { width:64px; text-align:center; }
+    .items .c-qty { width:64px; text-align:center; }
+    .items .c-rate { width:67px; text-align:center; }
+    .items .c-amount { width:68px; text-align:right; }
+    .items .c-discount { width:60px; text-align:right; }
+    .items .c-value { width:165px; text-align:right; padding-right:14px; }
     .items .c-hsn, .items .c-qty, .items .c-rate, .items .c-amount, .items .c-discount, .items .c-value { white-space:nowrap; overflow-wrap:normal; }
     .items .product-row td { height:63px; }
-    .items .product-row .c-desc { white-space:pre-line; line-height:1.55; }
+    .items .product-row .c-desc { white-space:pre-line; font-size:11px; line-height:1.35; }
     .items .blank td { height:21px; }
     .items .summary-row td { height:23px; }
     .items .total-row td { height:30px; }
-    .total-label { background:#d8e8f4; text-align:center; font-size:19px; font-weight:900; }
+    .total-label { background:#d8e8f4; text-align:center; font-size:11px; font-weight:900; }
     .words { min-height:62px; display:flex; align-items:center; justify-content:center; padding:8px 12px; border-bottom:2px solid; text-align:center; font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:1.35; font-weight:700; }
     .footer { display:grid; grid-template-columns:43% 57%; min-height:130px; }
     .bank { align-self:stretch; border-right:2px solid; }
     .bank-cap { height:17px; border-bottom:2px solid; background:#d8e8f4; }
     .bank p { margin:0; padding:2px 5px; border-bottom:2px solid; overflow:hidden; overflow-wrap:anywhere; line-height:1.2; }
-    .cert { display:flex; flex-direction:column; align-items:center; min-height:130px; padding:4px 8px; text-align:center; font-family:Georgia, "Times New Roman", serif; }
+    .cert { display:flex; flex-direction:column; align-items:center; min-height:130px; padding:4px 8px; text-align:center; font-family:Arial, Helvetica, sans-serif; }
     .cert-note { font-size:10px; }
     .sign-title { margin:4px 0 0; font-size:14px; font-weight:700; }
     .signature { flex:1 1 auto; min-height:28px; margin:2px 0; }
@@ -129,7 +123,7 @@
     @media print {
       @page { size: Letter portrait; margin:0; }
       body { background:#fff; }
-      .appbar, .mobile-tabs, .editor, .small-note, .column-resizer { display:none !important; }
+      .appbar, .mobile-tabs, .editor, .small-note { display:none !important; }
       .workspace, .preview-area { display:block; margin:0; padding:0; overflow:visible; min-height:0; background:#fff; }
       .paper-stage, .paper-wrap { width:8.5in !important; height:auto !important; min-height:0; margin:0; filter:none; transform:none !important; }
       .invoice-sheet { width:8.5in; height:auto; min-height:0; padding:.24in; font-size:12px; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
@@ -145,7 +139,7 @@
     </div>
     <div class="actions">
       <button class="btn btn-secondary" id="resetBtn" type="button">Reset sample</button>
-      <button class="btn btn-primary" id="printBtn" type="button">Preview PDF</button>
+      <button class="btn btn-primary" id="printBtn" type="button">Print / Save PDF</button>
     </div>
   </header>
 
@@ -156,7 +150,7 @@
 
   <main class="workspace">
     <aside class="editor" aria-label="Invoice editor">
-      <p class="intro">Changes appear instantly in the invoice preview. Drag the table header dividers to adjust column sizes.</p>
+      <p class="intro">Changes appear instantly in the invoice preview.</p>
       <details open="">
         <summary>Invoice details</summary>
         <div class="fields">
@@ -194,10 +188,6 @@
 3.900 Gms</textarea></div><div class="field"><label>HSN code</label><input data-item="0" data-prop="hsn" value="711319"></div><div class="field"><label>Quantity / grams</label><input type="number" min="0" step="0.001" data-item="0" data-prop="qty" value="4.410"></div><div class="field"><label>Rate</label><input type="number" min="0" step="0.01" data-item="0" data-prop="rate" value="9783.13"></div><div class="field"><label>Discount amount</label><input type="number" min="0" step="0.01" data-item="0" data-prop="discount" value="0"></div></div></div><button class="add-item" id="addItem" type="button">+ Add another product</button></div>
       </details>
       <details>
-        <summary>Adjust table column widths</summary>
-        <div class="fields" id="columnWidthFields"><div class="column-control"><label for="columnWidth0"><span>Sr.No</span><span class="column-width-value" data-column-value="0">44px</span></label><input id="columnWidth0" type="range" min="36" max="320" step="1" value="44" data-column-width="0"></div><div class="column-control"><label for="columnWidth1"><span>Production Description</span><span class="column-width-value" data-column-value="1">207px</span></label><input id="columnWidth1" type="range" min="110" max="320" step="1" value="207" data-column-width="1"></div><div class="column-control"><label for="columnWidth2"><span>HSN Code</span><span class="column-width-value" data-column-value="2">85px</span></label><input id="columnWidth2" type="range" min="48" max="320" step="1" value="85" data-column-width="2"></div><div class="column-control"><label for="columnWidth3"><span>QTY GMS</span><span class="column-width-value" data-column-value="3">82px</span></label><input id="columnWidth3" type="range" min="48" max="320" step="1" value="82" data-column-width="3"></div><div class="column-control"><label for="columnWidth4"><span>Rate</span><span class="column-width-value" data-column-value="4">58px</span></label><input id="columnWidth4" type="range" min="48" max="320" step="1" value="58" data-column-width="4"></div><div class="column-control"><label for="columnWidth5"><span>Amount</span><span class="column-width-value" data-column-value="5">77px</span></label><input id="columnWidth5" type="range" min="52" max="320" step="1" value="77" data-column-width="5"></div><div class="column-control"><label for="columnWidth6"><span>Discount</span><span class="column-width-value" data-column-value="6">76px</span></label><input id="columnWidth6" type="range" min="52" max="320" step="1" value="76" data-column-width="6"></div><div class="column-control"><label for="columnWidth7"><span>Value of supply</span><span class="column-width-value" data-column-value="7">135px</span></label><input id="columnWidth7" type="range" min="90" max="320" step="1" value="135" data-column-width="7"></div><button class="add-item" id="resetColumnWidths" type="button">Reset column widths</button></div>
-      </details>
-      <details>
         <summary>Company and bank details</summary>
         <div class="fields">
           <div class="field wide"><label for="companyName">Company name</label><input id="companyName" data-key="companyName"></div>
@@ -212,9 +202,9 @@
     </aside>
 
     <section class="preview-area" aria-label="Invoice preview">
-      <div class="paper-stage" id="paperStage" style="width: 816px; height: 1021px;">
+      <div class="paper-stage" id="paperStage" style="width: 816px; height: 975px;">
       <div class="paper-wrap" id="paperWrap" style="transform: scale(1);">
-        <article class="invoice-sheet" id="invoiceSheet" style="--col-num: 44px; --col-desc: 207px; --col-hsn: 85px; --col-qty: 82px; --col-rate: 58px; --col-amount: 77px; --col-discount: 76px; --col-value: 135px;">
+        <article class="invoice-sheet" id="invoiceSheet">
           <div class="invoice-border">
             <section class="company-head">
               <h2 data-out="companyName">SATYAM DIAMOND</h2>
@@ -246,7 +236,7 @@ UNITED STATES</span></div>
               </div>
             </section>
             <table class="items" aria-label="Invoice items">
-              <thead><tr><th class="c-num">Sr.No<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-desc">Production Description<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-hsn">HSN<br>Code<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-qty">QTY GMS<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-rate">Rate<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-amount">Amount<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-discount">Discount<span class="column-resizer" title="Drag to resize columns" aria-hidden="true"></span></th><th class="c-value">Value of supply</th></tr></thead>
+              <thead><tr><th class="c-num">Sr.No</th><th class="c-desc">Production Description</th><th class="c-hsn">HSN<br>Code</th><th class="c-qty">QTY GMS</th><th class="c-rate">Rate</th><th class="c-amount">Amount</th><th class="c-discount">Discount</th><th class="c-value">Value of supply</th></tr></thead>
               <tbody id="invoiceRows"><tr class="product-row"><td class="c-num">1</td><td class="c-desc">10K Gold Jewellery Studded with Diamonds
 2.67 carats and Net Gold
 3.900 Gms</td><td class="c-hsn">711319</td><td class="c-qty">4.410</td><td class="c-rate">9783.13</td><td class="c-amount"></td><td class="c-discount"></td><td class="c-value">43143.60</td></tr></tbody>
@@ -363,102 +353,6 @@ UNITED STATES</span></div>
       stage.style.width=`${816*scale}px`;
       stage.style.height=`${document.getElementById('invoiceSheet').offsetHeight*scale}px`;
     }
-    const invoiceColumns=[
-      {key:'num',label:'Sr.No',width:44,defaultWidth:44,min:36},
-      {key:'desc',label:'Production Description',width:232,defaultWidth:232,min:110},
-      {key:'hsn',label:'HSN Code',width:64,defaultWidth:64,min:48},
-      {key:'qty',label:'QTY GMS',width:64,defaultWidth:64,min:48},
-      {key:'rate',label:'Rate',width:67,defaultWidth:67,min:48},
-      {key:'amount',label:'Amount',width:68,defaultWidth:68,min:52},
-      {key:'discount',label:'Discount',width:60,defaultWidth:60,min:52},
-      {key:'value',label:'Value of supply',width:165,defaultWidth:165,min:90}
-    ];
-    try {
-      const saved=JSON.parse(localStorage.getItem('satyamInvoiceColumnWidths')||'null');
-      if(Array.isArray(saved)&&saved.length===invoiceColumns.length) {
-        saved.forEach((width,i)=>{ if(Number.isFinite(width)&&width>=invoiceColumns[i].min) invoiceColumns[i].width=width; });
-      }
-    } catch {}
-    function applyColumnWidths() {
-      const sheet=document.getElementById('invoiceSheet');
-      invoiceColumns.forEach(column=>sheet.style.setProperty(`--col-${column.key}`,`${column.width}px`));
-      requestAnimationFrame(()=>{ fitInvoiceText(); fitPreview(); });
-    }
-    function saveColumnWidths() {
-      localStorage.setItem('satyamInvoiceColumnWidths',JSON.stringify(invoiceColumns.map(column=>column.width)));
-    }
-    function syncColumnControls() {
-      document.querySelectorAll('[data-column-width]').forEach(input=>{
-        const index=Number(input.dataset.columnWidth);
-        input.value=invoiceColumns[index].width;
-        document.querySelector(`[data-column-value="${index}"]`).textContent=`${invoiceColumns[index].width}px`;
-      });
-    }
-    function setColumnWidth(index,requestedWidth) {
-      const partnerIndex=index===1?7:1;
-      const column=invoiceColumns[index];
-      const partner=invoiceColumns[partnerIndex];
-      const pairTotal=column.width+partner.width;
-      const next=Math.max(column.min,Math.min(pairTotal-partner.min,requestedWidth));
-      column.width=Math.round(next);
-      partner.width=Math.round(pairTotal-next);
-      applyColumnWidths();
-      syncColumnControls();
-      saveColumnWidths();
-    }
-    function renderColumnControls() {
-      const root=document.getElementById('columnWidthFields');
-      root.innerHTML=invoiceColumns.map((column,index)=>`<div class="column-control"><label for="columnWidth${index}"><span>${column.label}</span><span class="column-width-value" data-column-value="${index}">${column.width}px</span></label><input id="columnWidth${index}" type="range" min="${column.min}" max="320" step="1" value="${column.width}" data-column-width="${index}"></div>`).join('')+'<button class="add-item" id="resetColumnWidths" type="button">Reset column widths</button>';
-      root.querySelectorAll('[data-column-width]').forEach(input=>input.addEventListener('input',event=>setColumnWidth(Number(event.target.dataset.columnWidth),Number(event.target.value))));
-      document.getElementById('resetColumnWidths').addEventListener('click',()=>{
-        invoiceColumns.forEach(column=>column.width=column.defaultWidth);
-        applyColumnWidths();
-        syncColumnControls();
-        saveColumnWidths();
-      });
-    }
-    function addColumnResizers() {
-      const headers=[...document.querySelectorAll('.items thead th')];
-      headers.slice(0,-1).forEach((header,index)=>{
-        const handle=document.createElement('span');
-        handle.className='column-resizer';
-        handle.title='Drag to resize columns';
-        handle.setAttribute('aria-hidden','true');
-        handle.addEventListener('pointerdown',event=>{
-          event.preventDefault();
-          handle.classList.add('active');
-          handle.setPointerCapture(event.pointerId);
-          const startX=event.clientX;
-          const startLeft=invoiceColumns[index].width;
-          const startRight=invoiceColumns[index+1].width;
-          const total=startLeft+startRight;
-          const wrap=document.getElementById('paperWrap');
-          const scale=wrap.getBoundingClientRect().width/wrap.offsetWidth||1;
-          const move=moveEvent=>{
-            const delta=(moveEvent.clientX-startX)/scale;
-            const minLeft=invoiceColumns[index].min;
-            const minRight=invoiceColumns[index+1].min;
-            const nextLeft=Math.max(minLeft,Math.min(total-minRight,startLeft+delta));
-            invoiceColumns[index].width=Math.round(nextLeft);
-            invoiceColumns[index+1].width=Math.round(total-nextLeft);
-            applyColumnWidths();
-          };
-          const stop=()=>{
-            handle.classList.remove('active');
-            handle.removeEventListener('pointermove',move);
-            handle.removeEventListener('pointerup',stop);
-            handle.removeEventListener('pointercancel',stop);
-            saveColumnWidths();
-            syncColumnControls();
-          };
-          handle.addEventListener('pointermove',move);
-          handle.addEventListener('pointerup',stop);
-          handle.addEventListener('pointercancel',stop);
-        });
-        header.appendChild(handle);
-      });
-      applyColumnWidths();
-    }
     function setMobileView(showPreview) {
       document.body.classList.toggle('show-preview',showPreview);
       document.getElementById('editTab').classList.toggle('active',!showPreview);
@@ -470,12 +364,13 @@ UNITED STATES</span></div>
     }
     document.getElementById('editTab').addEventListener('click',()=>setMobileView(false));
     document.getElementById('previewTab').addEventListener('click',()=>setMobileView(true));
-    document.getElementById('printBtn').addEventListener('click',()=>setMobileView(true));
+    document.getElementById('printBtn').addEventListener('click',()=>{
+      fitInvoiceText();
+      window.print();
+    });
     document.getElementById('resetBtn').addEventListener('click',()=>{ state=structuredClone(sample); populate(); });
     window.addEventListener('resize',fitPreview);
     window.addEventListener('beforeprint',fitInvoiceText);
-    renderColumnControls();
-    addColumnResizers();
     populate();
   </script>
 
